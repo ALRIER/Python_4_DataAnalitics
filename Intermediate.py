@@ -239,3 +239,44 @@ else :
 print(dice)
 print(step)
 
+'''---------------------------#RANDOM WALKS#---------------------'''
+
+# Initialize random_walk
+np.random.seed(123) #seteo la semilla 123
+random_walk=[0] #creo una lista vacía 
+for x in range(100) : #itero por 100 veces
+    # Set step: last element in random_walk
+    step=random_walk[-1] #marco el primer paso -1
+    # Roll the dice
+    dice = np.random.randint(1,7) #creo el dado y su lanzamieto
+    # Determine next step
+    if dice <= 2:
+        step = step - 1
+    elif dice <= 5:
+        step = step + 1
+    else: #creo los pasos del dado
+        step = step + np.random.randint(1,7)
+    # Agrego unos randoms a las tiradas del dado. 
+    random_walk.append(step) #hago append para guardar los resultados 
+    #de cada tirada en la variable llamada random_walk
+# Print random_walk
+print(random_walk)
+
+'''pero en la lista el random walk puede irse a -1 y hay ocasiones en que 
+eso no tiene sentido alguno... entonces creo un paso extra planteando
+un maximo en el número de pasos que puede haber'''
+random_walk = [0]
+for x in range(100) :
+    step = random_walk[-1]
+    dice = np.random.randint(1,7)
+    if dice <= 2:
+       step = max(0, step - 1)#---> este es el paso donde decreto que 
+#El valor máximo que el random walk puede alcanzar es 0
+    elif dice <= 5:
+        step = step + 1
+    else:
+        step = step + np.random.randint(1,7)
+    random_walk.append(step)
+print(random_walk)
+
+
