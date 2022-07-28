@@ -118,4 +118,106 @@ print(cars.loc['MOR'])
 # Print sub-DataFrame
 print(cars.loc[['RU', 'MOR'], ['country', 'drives_right']])
 
+#generando iteraciones para ciclos for y loops... 
+
+''' si lo que uno quiere es hacer iteraciones dentro de varios elementos de un
+ciclo entonces uno puede crear un ciclo, denominar variables x y y y hacer que
+el ciclo recorra los elementos dentro del conjunto de datos. 
+
+en el caso de python uno puede crear iteraciones para arrelos y diccionarios
+que tienen llaves keys y elementos conformados dentro... asi'''
+
+# Definition of dictionary
+europe = {'spain':'madrid', 'france':'paris', 'germany':'berlin',
+          'norway':'oslo', 'italy':'rome', 'poland':'warsaw', 'austria':'vienna' }
+          
+# Iterate over europe
+''' este ciclo agarra cada elemento del diccionario europa, pero como yo 
+definí un elemento X y uno Y en el loop, entonces el algoritmo recorre cada
+elemento del diccionario tomando como referencia la llave de acceso al
+al diccionario que en este caso sera una capital'''
+for x,y in europe.items():
+    print("the capital of"+str(x)+ "is " +str(y))
+
+'''ahora iterando sobre matrices 2D'''
+import numpy as np
+# For loop over np_height
+for X in np_height:
+    print(str(X) + " inches")
+
+# For loop over np_baseball
+for X in np.nditer(np_baseball):
+    print(X)
+    
+'''iterrows
+en las diapositivas de loops'''
+
+# Import cars data
+import pandas as pd
+cars = pd.read_csv('cars.csv', index_col = 0)
+
+# Iterate over rows of cars
+for labs, row in cars.iterrows():
+    print(labs)
+    print(row)
+
+'''   cars_per_cap        country  drives_right
+US            809  United States          True
+AUS           731      Australia         False
+JPN           588          Japan         False
+IN             18          India         False
+RU            200         Russia          True
+
+esta es la matriz de cars.csv y como es un dataframe hay que llamar 
+el loop diferente...'''
+# Import cars data
+import pandas as pd
+cars = pd.read_csv('cars.csv', index_col = 0)
+
+# Adapt for loop
+for lab, row in cars.iterrows() :
+    print(lab + ": " + str(row['cars_per_cap']))
+'''en este caso yo quería que se imprimieran dos valores
+por un lado la etiqueta lab y por el otro el valor de la
+columna y por eso llamé lab + str(row) de la columna 
+llamara cars_per_cap'''
+
+
+# Import cars data
+import pandas as pd
+cars = pd.read_csv('cars.csv', index_col = 0)
+
+# Code for loop that adds COUNTRY column
+for lab, row in cars.iterrows() :
+    cars.loc[lab,"COUNTRY"] = row["country"].upper()
+'''Aquí lo que hago es agarrar cada valor de la columna
+country, lo paso a mayusculas y luego lo imprimo nuevamente 
+en una nueva columna llamada "COUNTRY"'''
+
+# Use .apply(str.upper)
+cars["COUNTRY"] = cars["country"].apply(str.upper)
+'''esta línea hace lo mismo pero en otro orden'''
+
+'''
+Roll the dice
+In the previous exercise, you used rand(), that generates a random float
+between 0 and 1.
+
+As Hugo explained in the video you can just as well use randint(),
+also a function of the random package, to generate integers randomly.
+The following call generates the integer 4, 5, 6 or 7 randomly.
+8 is not included.
+
+import numpy as np
+np.random.randint(4, 8)
+NumPy has already been imported as np and a seed has been set.
+Can you roll some dice?'''
+
+# Import numpy and set seed
+import numpy as np
+np.random.seed(123)
+# Use randint() to simulate a dice
+print(np.random.randint(1,7))
+# Use randint() again
+print(np.random.randint(1,7))
 
