@@ -278,5 +278,8 @@ for x in range(100) :
         step = step + np.random.randint(1,7)
     random_walk.append(step)
 print(random_walk)
-
+# Plot random_walk
+plt.plot(random_walk)
+# Show the plot
+plt.show()
 
