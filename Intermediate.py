@@ -322,4 +322,36 @@ np_aw_t=np.transpose(np_aw)
 plt.plot(np_aw_t)
 plt.show()
 
+'''implementar la torpeza
+Con este código suyo cuidadosamente escrito, cambiar la cantidad de veces que
+se debe simular la caminata aleatoria es muy fácil. Simplemente actualice la función
+range() en el bucle for de nivel superior.
+
+¡Todavía hay algo que olvidamos! Eres un poco torpe y tienes un 0,1%
+de posibilidades de caerte. Eso requiere otra generación de números aleatorios. 
+Básicamente, puede generar un flotante aleatorio
+entre 0 y 1. Si este valor es menor o igual a 0.001, debe restablecer el paso a 0.'''
+# Simulate random walk 250 times
+all_walks = []
+for i in range(250) :
+    random_walk = [0]
+    for x in range(100) :
+        step = random_walk[-1]
+        dice = np.random.randint(1,7)
+        if dice <= 2:
+            step = max(0, step - 1)
+        elif dice <= 5:
+            step = step + 1
+        else:
+            step = step + np.random.randint(1,7)
+
+        # Implement clumsiness
+        if np.random.rand() <= 0.001: #esta es la parte nueva de la caminata... no entiendo muy bien de que se trata.
+            step = 0
+        random_walk.append(step)
+    all_walks.append(random_walk)
+# Create and plot np_aw_t
+np_aw_t = np.transpose(np.array(all_walks))
+plt.plot(np_aw_t)
+plt.show()
 
