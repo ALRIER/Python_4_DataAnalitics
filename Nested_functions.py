@@ -51,8 +51,7 @@ def echo_shout(word):
     print(echo_word)
 # Call function echo_shout() with argument 'hello'
 echo_shout('hello')
-#------------------------------------------------------------------------
-
+#---------------------------------------------------------------------
 # Define shout_echo
 def shout_echo(word1, echo=1):
     """Concatenate echo copies of word1 and three
