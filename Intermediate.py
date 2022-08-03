@@ -322,6 +322,160 @@ np_aw_t=np.transpose(np_aw)
 plt.plot(np_aw_t)
 plt.show()
 
+'''implementar la torpeza
+Con este código suyo cuidadosamente escrito, cambiar la cantidad de veces que
+se debe simular la caminata aleatoria es muy fácil. Simplemente actualice la función
+range() en el bucle for de nivel superior.
+
+¡Todavía hay algo que olvidamos! Eres un poco torpe y tienes un 0,1%
+de posibilidades de caerte. Eso requiere otra generación de números aleatorios. 
+Básicamente, puede generar un flotante aleatorio
+entre 0 y 1. Si este valor es menor o igual a 0.001, debe restablecer el paso a 0.'''
+# Simulate random walk 250 times
+all_walks = []
+for i in range(250) :
+    random_walk = [0]
+    for x in range(100) :
+        step = random_walk[-1]
+        dice = np.random.randint(1,7)
+        if dice <= 2:
+            step = max(0, step - 1)
+        elif dice <= 5:
+            step = step + 1
+        else:
+            step = step + np.random.randint(1,7)
+
+        # Implement clumsiness
+        if np.random.rand() <= 0.001: #esta es la parte nueva de la caminata... no entiendo muy bien de que se trata.
+            step = 0
+        random_walk.append(step)
+    all_walks.append(random_walk)
+# Create and plot np_aw_t
+np_aw_t = np.transpose(np.array(all_walks))
+plt.plot(np_aw_t)
+plt.show()
+
+#Definicion de funciones propias. 
+
+# Define shout with parameters word1 and word2
+def shout(word1, word2):
+    """Concatenate strings with three exclamation marks"""
+    # Concatenate word1 with '!!!': shout1
+    shout1=word1 + '!!!'
+        # Concatenate word2 with '!!!': shout2
+    shout2=word2 + '!!!'
+    # Concatenate shout1 with shout2: new_shout
+    new_shout= shout1+shout2
+    # Return new_shout
+    return new_shout
+# Pass 'congratulations' and 'you' to shout(): yell
+yell=shout('congratulations','you')
+# Print yell
+print(yell)
+
+#ahota con tuplas
+# Define shout_all with parameters word1 and word2
+def shout_all(word1, word2):
+    """Return a tuple of strings"""
+    # Concatenate word1 with '!!!': shout1
+    shout1 = word1 + '!!!'
+    # Concatenate word2 with '!!!': shout2
+    shout2 = word2 + '!!!'
+    # Construct a tuple with shout1 and shout2: shout_words #hago una tupla
+    shout_words = (shout1, shout2)
+    # Return shout_words #la retorno para dejar los valores expuestos
+    return shout_words
+# Pass 'congratulations' and 'you' to shout_all(): yell1, yell2 #luego unifico los valores a una variable inmutable
+yell1, yell2 = shout_all('congratulations', 'you')
+# Print yell1 and yell2
+print(yell1)
+print(yell2)
+
+#Twitter data analyse. 
+'''
+Bringing it all together (1)
+You've got your first taste of writing your own functions in the previous exercises. 
+You've learned how to add parameters to your own function definitions, return a value or 
+multiple values with tuples, and how to call the functions you've defined.
+
+In this and the following exercise, you will bring together all these concepts and apply them 
+to a simple data science problem. You will load a dataset and develop functionalities to extract simple 
+insights from the data.
+
+For this exercise, your goal is to recall how to load a dataset into a DataFrame. The dataset contains 
+Twitter data and you will iterate over entries in a column to build a dictionary in which the keys are 
+the names of languages and the values are the number of tweets in the given language. The file tweets.csv 
+is available in your current directory.
+
+Be aware that this is real data from Twitter and as such there is always a risk that it may contain 
+profanity or other offensive content (in this exercise, and any following exercises that also use real 
+Twitter data).'''
+
+# Import pandas
+import pandas as pd
+# Import Twitter data as DataFrame: df
+df = pd.read_csv('tweets.csv')
+# Initialize an empty dictionary: langs_count
+langs_count = {}
+# Extract column from DataFrame: col
+col = df['lang']
+# Iterate over lang column in DataFrame
+for entry in col:
+    # If the language is in langs_count, add 1
+    if entry in langs_count.keys():
+        langs_count[entry] += 1
+    # Else add the language to langs_count, set the value to 1
+    else:
+        langs_count[entry] = 1
+# Print the populated dictionary
+print(langs_count)
+
+'''{'en': 97, 'et': 1, 'und': 2}'''
+
+#segundo ejercicio...
+# Define count_entries()
+def count_entries(df, col_name):
+    """Return a dictionary with counts of 
+    occurrences as value for each key."""
+    # Initialize an empty dictionary: langs_count
+    langs_count = {}
+    # Extract column from DataFrame: col
+    col = df[col_name]
+    # Iterate over lang column in DataFrame
+    for entry in col:
+        # If the language is in langs_count, add 1
+        if entry in langs_count.keys():
+            langs_count[entry] += 1
+        # Else add the language to langs_count, set the value to 1
+        else:
+            langs_count[entry] = 1
+    # Return the langs_count dictionary
+    return langs_count
+# Call count_entries(): result
+result = count_entries(tweets_df, 'lang')
+# Print the result
+print(result)
+#{'en': 97, 'et': 1, 'und': 2}
+
+'''uso de local vs global scopes'''
+
+# Create a string: team
+team = "teen titans"
+# Define change_team()
+def change_team():
+    """Change the value of the global variable team."""
+    # Use team in global scope
+    global team
+    # Change the value of team in global: team
+    team = "justice league"
+# Print team
+print(team)
+# Call change_team()
+change_team()
+# Print team
+print(team)
+
+
 
 
 
